@@ -1,9 +1,11 @@
 class ChaptersController < ApplicationController
   def index
-    render json: Chapter.where(book_id: params[:book_id]), each_serializer: ChapterSerializer
+    book = Book.find(params[:book_id])
+    render json: book.chapters, each_serializer: ChapterSerializer
   end
 
   def show
-    render json: Chapter.where(book_id: params[:book_id]).find(params[:id]), serializer: ChapterSerializer
+    book = Book.find(params[:book_id])
+    render json: book.chapters.find(params[:id]), serializer: ChapterSerializer
   end
 end
