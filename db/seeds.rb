@@ -68,5 +68,22 @@ bible_book_names = [
 ]
 
 bible_book_names.each do |book_params|
-  Book.create(book_params)
+  Book.find_or_create_by(book_params)
+end
+
+file = File.read('lib/tasks/assets/cornilescu.json')
+all_books = JSON.parse(file)
+
+all_books.each_with_index do |book_data, book_index|
+  chapters = book_data['chapters']
+  book_number = book_index + 1
+  book = Book.find_by(number: book_number)
+  chapters.each_with_index do |chapter_data, chapter_index|
+    chapter_number = chapter_index + 1
+    chapter = Chapter.create(number: chapter_number, book_id: book.id)
+    chapter_data.each_with_index do |verse_value, verse_index|
+      verse_number = verse_index + 1
+      Verse.create(number: verse_number, value: verse_value, chapter_id: chapter.id)
+    end
+  end
 end
