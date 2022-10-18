@@ -6,6 +6,7 @@ class ChaptersController < ApplicationController
 
   def show
     book = Book.find(params[:book_id])
-    render json: book.chapters.find(params[:id])
+    chapter = Chapter.find(params[:id])
+    render json: chapter
   end
 end
