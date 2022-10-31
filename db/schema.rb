@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_17_091813) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_091033) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.integer "number"
@@ -24,6 +24,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_091813) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_chapters_on_book_id"
+  end
+
+  create_table "song_lines", force: :cascade do |t|
+    t.string "value"
+    t.integer "song_part_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_part_id"], name: "index_song_lines_on_song_part_id"
+  end
+
+  create_table "song_parts", force: :cascade do |t|
+    t.string "name"
+    t.integer "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_song_parts_on_song_id"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "verses", force: :cascade do |t|
