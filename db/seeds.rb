@@ -87,3 +87,19 @@ all_books.each_with_index do |book_data, book_index|
     end
   end
 end
+
+filenames = Dir.entries("lib/cantari/").drop(2)
+filenames.each do |filename|
+  xml = File.open("lib/cantari/#{filename}")
+  hash_song = Hash.from_xml(xml)
+  song = Song.create(name: hash_song['song']['title'])
+  songs_data = hash_song['song']['lyrics'].split("\n").split { |el| el == "" }.reject(&:empty?).map { |el| el.map(&:strip) }
+  songs_data.each do |song_data|
+    song_part_name = song_data.first
+    song_part = SongPart.create(name: song_part_name, song_id: song.id)
+    song_line_values = song_data.drop(1)
+    song_line_values.each do |song_line_value|
+      SongLine.create(value: song_line_value, song_part_id: song_part.id)
+    end
+  end
+end
