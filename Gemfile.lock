@@ -111,6 +111,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -166,6 +168,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   bootsnap
   debug
+  pagy (~> 5.10)
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4)
