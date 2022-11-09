@@ -57,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_102217) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_songs_on_slug", unique: true
   end
 
   create_table "verses", force: :cascade do |t|
