@@ -18,6 +18,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 # Xml toolkit
 gem 'rexml', '~> 3.2', '>= 3.2.4'
 
+# Friendly id
+gem 'friendly_id', '~> 5.4.0'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
