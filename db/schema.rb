@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_11_09_102217) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.integer "number"
@@ -20,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_102217) do
 
   create_table "chapters", force: :cascade do |t|
     t.integer "number"
-    t.integer "book_id"
+    t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_chapters_on_book_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_102217) do
 
   create_table "song_lines", force: :cascade do |t|
     t.string "value"
-    t.integer "song_part_id"
+    t.bigint "song_part_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["song_part_id"], name: "index_song_lines_on_song_part_id"
@@ -47,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_102217) do
 
   create_table "song_parts", force: :cascade do |t|
     t.string "name"
-    t.integer "song_id"
+    t.bigint "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["song_id"], name: "index_song_parts_on_song_id"
@@ -62,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_102217) do
   end
 
   create_table "verses", force: :cascade do |t|
-    t.integer "chapter_id"
+    t.bigint "chapter_id"
     t.integer "number"
     t.string "value"
     t.datetime "created_at", null: false
