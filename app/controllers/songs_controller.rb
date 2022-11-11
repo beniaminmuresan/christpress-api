@@ -1,6 +1,9 @@
 class SongsController < ApplicationController
+  has_scope :by_keyword
+
   def index
-    songs = Song.all.order(:name)
+    songs = apply_scopes(Song).all
+    songs = songs.order(:name)
     songs = paginate_items(songs)
     render json: songs
   end
