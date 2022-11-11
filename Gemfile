@@ -21,6 +21,9 @@ gem 'rexml', '~> 3.2', '>= 3.2.4'
 # Friendly id
 gem 'friendly_id', '~> 5.4.0'
 
+# Map quary params
+gem 'has_scope'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
