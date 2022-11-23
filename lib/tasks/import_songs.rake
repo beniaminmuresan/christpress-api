@@ -3,7 +3,7 @@ desc "Import all bible books, chapters & verses"
 task import_songs: :environment do
   filenames = Dir.entries("lib/assets/songs/").drop(2)
   filenames.each do |filename|
-    xml = File.open("lib/cantari/#{filename}")
+    xml = File.open("lib/assets/songs/#{filename}")
     hash_song = Hash.from_xml(xml)
     song = Song.create(name: hash_song['song']['title'])
     songs_data = hash_song['song']['lyrics'].split("\n").split { |el| el == "" }.reject(&:empty?).map { |el| el.map(&:strip) }
