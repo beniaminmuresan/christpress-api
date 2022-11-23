@@ -1,4 +1,6 @@
 class Book < ApplicationRecord
+  default_scope { order(:number) }
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 
