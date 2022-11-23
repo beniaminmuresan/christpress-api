@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+docker-compose build
+echo "----- Importing bible books into db -----"
+docker-compose run --rm api rake import_bible
+echo "--- Importing all text songs into db ---"
+docker-compose run --rm api rake import_songs
