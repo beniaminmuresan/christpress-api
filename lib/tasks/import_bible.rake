@@ -5,7 +5,7 @@ desc "Import all bible books, chapters & verses"
 task import_bible: :environment do
   bible_book_names = [
     { number: 1, abbrev: "GEN", name: "Geneza" },
-    { number: 2, abbrev: "EXO", name: "Exod" },
+    { number: 2, abbrev: "EXO", name: "Exodul" },
     { number: 3, abbrev: "LEV", name: "Leviticul" },
     { number: 4, abbrev: "NUM", name: "Numeri" },
     { number: 5, abbrev: "DEU", name: "Deuteronomul" },
@@ -23,9 +23,9 @@ task import_bible: :environment do
     { number: 17, abbrev: "EST", name: "Estera" },
     { number: 18, abbrev: "JOB", name: "Iov" },
     { number: 19, abbrev: "PSA", name: "Psalmii" },
-    { number: 20, abbrev: "PRO", name: "Proverbe" },
+    { number: 20, abbrev: "PRO", name: "Proverbele" },
     { number: 21, abbrev: "ECC", name: "Eclesiastul" },
-    { number: 22, abbrev: "SOS", name: "Cantarea Cantarilor" },
+    { number: 22, abbrev: "SOS", name: "Cantarea cantarilor" },
     { number: 23, abbrev: "ISA", name: "Isaia" },
     { number: 24, abbrev: "JER", name: "Ieremia" },
     { number: 25, abbrev: "LAM", name: "Plangerile lui Ieremia" },
@@ -47,7 +47,7 @@ task import_bible: :environment do
     { number: 41, abbrev: "MAR", name: "Marcu" },
     { number: 42, abbrev: "LUK", name: "Luca" },
     { number: 43, abbrev: "JOH", name: "Ioan" },
-    { number: 44, abbrev: "ACT", name: "Faptele Apostolilor" },
+    { number: 44, abbrev: "ACT", name: "Faptele apostolilor" },
     { number: 45, abbrev: "ROM", name: "Romani" },
     { number: 46, abbrev: "1CO", name: "1 Corinteni" },
     { number: 47, abbrev: "2CO", name: "2 Corinteni" },
@@ -77,5 +77,18 @@ task import_bible: :environment do
   end
 
   filename = 'lib/assets/bible_translations/cornilescu.csv'
-  
+  verses = SmarterCSV.process(filename)
+  verses.group_by { |verse| verse[:bookname] }.each do |book_name, first_group|
+    puts "------ Start importing book: #{book_name} ------"
+    book = Book.find_by_name(book_name)
+    group_by_chapter_number = first_group.group_by { |verse| verse[:chapternumber] }
+    chapter_params = group_by_chapter_number.keys.map { |chapter_number| { number: chapter_number, book_id: book.id  } }
+    chapters_result = Chapter.insert_all(chapter_params, returning: %w[id])
+    group_by_chapter_number.each do |chapter_number, second_group|
+      chapter_id = chapters_result[chapter_number.to_i - 1]['id']
+      verses_params = second_group.map { |params| { chapter_id:, number: params[:versenumber], value: params[:versetext] } }
+      Verse.insert_all(verses_params)
+    end
+    puts "------ Finished importing book: #{book.name} ------"
+  end
 end
