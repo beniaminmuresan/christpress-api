@@ -86,7 +86,15 @@ task import_bible: :environment do
     chapters_result = Chapter.insert_all(chapter_params, returning: %w[id])
     group_by_chapter_number.each do |chapter_number, second_group|
       chapter_id = chapters_result[chapter_number.to_i - 1]['id']
-      verses_params = second_group.map { |params| { chapter_id:, number: params[:versenumber], value: params[:versetext] } }
+      verse_name = "#{book.name} "
+      verses_params = second_group.map do |params|
+        {
+          reference_name: "#{book.name} #{chapter_number}:#{params[:versenumber]}",
+          number: params[:versenumber],
+          value: params[:versetext],
+          chapter_id:
+        }
+      end
       Verse.insert_all(verses_params)
     end
     puts "------ Finished importing book: #{book.name} ------"
