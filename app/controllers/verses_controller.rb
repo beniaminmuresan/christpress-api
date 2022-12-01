@@ -2,7 +2,7 @@ class VersesController < ApplicationController
   def index
     book = Book.friendly.find(params[:book_id])
     chapter = book.chapters.find(params[:chapter_id])
-    render json: chapter.verses
+    render json: chapter.verses.includes(:reference_verses)
   end
 
   def show
