@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  resources :books, only: [:index, :show] do
-    resources :chapters, only: [:index, :show] do
-      resources :verses, only: [:index, :show]
+  resources :books, only: %i[index show] do
+    resources :chapters, only: %i[index show] do
+      resources :verses, only: %i[index show]
     end
   end
 
-  resources :songs, only: [:index, :show] do
+  resources :songs, only: %i[index show] do
     resources :song_parts, only: [:index]
   end
 end

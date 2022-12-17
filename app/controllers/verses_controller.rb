@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VersesController < ApplicationController
   def index
     book = Book.friendly.find(params[:book_id])

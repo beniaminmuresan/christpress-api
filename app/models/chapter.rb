@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Chapter < ApplicationRecord
   default_scope { order(:number) }
 

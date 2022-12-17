@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SongPartsController < ApplicationController
   def index
     song = Song.friendly.find(params[:song_id])
