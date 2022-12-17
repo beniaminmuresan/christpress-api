@@ -34,6 +34,22 @@ group :development do
   gem 'rubocop-performance', require: false
 end
 
+group :test do
+  # Rspec + useful dependecies
+  gem 'database_cleaner'
+  gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'rspec-json_expectations'
+  gem 'rspec_junit_formatter'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+  gem 'simplecov-rcov'
+  gem 'timecop'
+  gem 'vcr'
+  gem 'webmock'
+end
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
