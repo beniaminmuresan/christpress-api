@@ -19,7 +19,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.include LoginHelper, type: :controller
   config.include ActiveJob::TestHelper
   config.include ActionCable::TestHelper
 
