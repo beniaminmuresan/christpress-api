@@ -38,7 +38,7 @@ jobs:
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run tests
-        run: bundler exec rspec
+        run: rubocop
 
   lint:
     runs-on: ubuntu-latest
