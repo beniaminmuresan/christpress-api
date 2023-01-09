@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_154146) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_040410) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bible_reading_plans", force: :cascade do |t|
+    t.integer "no_of_items"
+    t.string "read_unit"
+    t.string "time_unit"
+    t.integer "notification_hour"
+    t.integer "notification_minute"
+    t.date "start_date"
+    t.string "notifications", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "name"
