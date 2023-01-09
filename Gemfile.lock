@@ -95,6 +95,13 @@ GEM
     diff-lcs (1.5.0)
     docile (1.4.0)
     erubi (1.11.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
+    faker (3.0.0)
+      i18n (>= 1.8.11, < 2)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
     globalid (1.0.0)
@@ -254,6 +261,8 @@ DEPENDENCIES
   bootsnap
   database_cleaner
   debug
+  factory_bot_rails
+  faker
   friendly_id (~> 5.4.0)
   has_scope
   pagy (~> 5.10)

@@ -35,13 +35,16 @@ group :development do
 end
 
 group :test do
+  # Mock Data
+  gem 'factory_bot_rails'
+  gem 'faker'
   # Rspec + useful dependecies
   gem 'database_cleaner'
-  gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'rspec-its'
   gem 'rspec-json_expectations'
   gem 'rspec_junit_formatter'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'simplecov-rcov'
